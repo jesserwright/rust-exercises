@@ -18,5 +18,6 @@ fn main() {
   // pig_latin::pig_latin("esse-jay");
   // assert_eq!("esse-jay", pig_latin::pig_latin("jesse"));
   // assert_eq!("apple-hay", pig_latin::pig_latin("apple"));
-  run();
+
+  assert_eq!("O", run());
 }
