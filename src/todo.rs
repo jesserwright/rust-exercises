@@ -1,26 +1,26 @@
-use std::collections::HashMap;
-
+#[allow(dead_code)]
 pub fn todo_app() {
-  let mut scores = HashMap::new();
+  // use std::collections::HashMap;
+  // let mut scores = HashMap::new();
 
-  scores.insert(String::from("Blue"), 10);
+  // scores.insert(String::from("Blue"), 10);
 
-  scores.entry(String::from("Yellow")).or_insert(50);
-  scores.entry(String::from("Blue")).or_insert(50);
+  // scores.entry(String::from("Yellow")).or_insert(50);
+  // scores.entry(String::from("Blue")).or_insert(50);
 
-  println!("{:?}", scores);
+  // println!("{:?}", scores);
 
-  let text = "hello world wonderful world";
+  // let text = "hello world wonderful world";
 
-  let mut map = HashMap::new();
+  // let mut map = HashMap::new();
 
-  for word in text.split_whitespace() {
-    let count = map.entry(word).or_insert(0);
-    println!("{}, {}", count, word);
-    *count += 1;
-  }
+  // for word in text.split_whitespace() {
+  //   let count = map.entry(word).or_insert(0);
+  //   println!("{}, {}", count, word);
+  //   *count += 1;
+  // }
 
-  println!("{:?}", map);
+  // println!("{:?}", map);
 
   #[derive(Debug)]
   struct TodoItem {
@@ -46,6 +46,7 @@ pub fn todo_app() {
     title: String::from("take out trash"),
     reusable: false,
   };
+
   todo_list.push(todo1);
 
   let todo2 = TodoItem::new(String::from("jesse"));

@@ -1,4 +1,6 @@
-pub fn mean(numbers: &mut <Vec>) -> u32 {
+use std::collections::HashMap;
+
+pub fn mean(numbers: Vec<usize>) {
   // Mean: (the average value)
   let mut total = 0;
   for number in &numbers {
@@ -8,9 +10,9 @@ pub fn mean(numbers: &mut <Vec>) -> u32 {
   println!("Mean: {}", total / numbers_length);
 }
 
-pub fn median(numbers: &mut <Vec>) {
+pub fn median(numbers: &mut Vec<usize>) {
   // Median (when sorted, the value in the middle position)
-  let mut numbers = vec![3, 2, 32, 2, 432, 5, 2, 8, 2];
+  let numbers_length = numbers.len();
   numbers.sort();
   if numbers_length % 2 == 1 {
     let median_index = (numbers_length - 1) / 2;
@@ -20,7 +22,7 @@ pub fn median(numbers: &mut <Vec>) {
   }
 }
 
-pub fn mode(numbers: &mut <Vec>) {
+pub fn mode(numbers: Vec<usize>) usize{
   // Mode (the value that occurs most often; a hash map will be helpful here) of the list.
   let mut mode = HashMap::new();
   for number in &numbers {
@@ -29,4 +31,3 @@ pub fn mode(numbers: &mut <Vec>) {
   }
   println!("Mode: {:#?}", mode);
 }
-
