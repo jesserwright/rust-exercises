@@ -5,7 +5,7 @@ where
     T: Fn(u32) -> u32,
 {
     calculation: T,
-    value: Option<u32>,
+    arg_map: HashMap<u32, u32>,
 }
 
 impl<T> Cacher<T>
@@ -15,15 +15,15 @@ where
     pub fn new(calculation: T) -> Cacher<T> {
         Cacher {
             calculation,
-            value: None,
+            arg_map: HashMap::new(),
         }
     }
     pub fn value(&mut self, arg: u32) -> u32 {
-        match self.value {
-            Some(v) => v,
+        match self.arg_map.get(&arg) {
+            Some(v) => *v,
             None => {
                 let v = (self.calculation)(arg);
-                self.value = Some(v);
+                self.arg_map.insert(arg, v);
                 v
             }
         }
