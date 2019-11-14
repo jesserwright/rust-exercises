@@ -1,24 +1,26 @@
 use std::collections::HashMap;
 
-pub struct Cacher<T>
+pub struct Cacher<T, I, R>
 where
-    T: Fn(u32) -> u32,
+    T: Fn(I) -> R,
 {
     calculation: T,
-    arg_map: HashMap<u32, u32>,
+    arg_map: HashMap<I, R>,
 }
 
-impl<T> Cacher<T>
+impl<T, I, R> Cacher<T, I, R>
 where
-    T: Fn(u32) -> u32,
+    T: Fn(I) -> R,
 {
-    pub fn new(calculation: T) -> Cacher<T> {
+    pub fn new(calculation: T) -> Cacher<T, I, R> {
+        let hmap: HashMap<I, R> = HashMap::new();
         Cacher {
             calculation,
-            arg_map: HashMap::new(),
+            arg_map: hmap,
         }
     }
-    pub fn value(&mut self, arg: u32) -> u32 {
+
+    pub fn value(&mut self, arg: I) -> R {
         match self.arg_map.get(&arg) {
             Some(v) => *v,
             None => {
@@ -40,7 +42,8 @@ fn call_with_different_values() {
     assert_eq!(v2, 2);
 }
 
+// TODO: cacher needs to be able to take any types!
 #[test]
-fn my_test() {
-    assert_eq!(1, 1);
+fn check_generic_values() {
+    let mut c = Cacher::new(|a| a);
 }
