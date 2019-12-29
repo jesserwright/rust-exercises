@@ -23,3 +23,7 @@ pub fn pig_latin(word: &str) -> String {
   }
   word // 🖐️🎤🔥
 }
+
+// TODO: add tests
+// assert_eq!("esse-jay", pig_latin::pig_latin("jesse"));
+// assert_eq!("apple-hay", pig_latin::pig_latin("apple"));

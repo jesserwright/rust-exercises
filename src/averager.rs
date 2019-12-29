@@ -22,7 +22,7 @@ pub fn median(numbers: &mut Vec<usize>) {
   }
 }
 
-pub fn mode(numbers: Vec<usize>) usize{
+pub fn mode(numbers: Vec<usize>) {
   // Mode (the value that occurs most often; a hash map will be helpful here) of the list.
   let mut mode = HashMap::new();
   for number in &numbers {
@@ -31,3 +31,5 @@ pub fn mode(numbers: Vec<usize>) usize{
   }
   println!("Mode: {:#?}", mode);
 }
+
+// TODO: add tests

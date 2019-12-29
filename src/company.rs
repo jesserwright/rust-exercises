@@ -31,3 +31,5 @@ pub fn company() {
     println!("All Departments: {:?}", departments);
   }
 }
+
+// TODO: add tests
