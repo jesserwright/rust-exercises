@@ -1,18 +1,24 @@
-mod averager;
-mod company;
-mod pig_latin;
-mod tic_tac_toe;
-mod todo;
+// #[derive(Copy, Clone)]
+struct C;
+
+struct B<'b> {
+    c: &'b C,
+}
+
+struct A<'a> {
+    b: B<'a>, // refrence to same
+    c: &'a C,
+}
+
+// all refer to the same lifetime
 
 fn main() {
-  company::company();
-  todo::todo_app();
-  tic_tac_toe::run();
-  let numbers: Vec<usize> = [3, 32, 3, 4, 3, 2, 554].to_vec();
-  averager::mean(numbers);
-  let mut numbers2: Vec<usize> = [1, 22, 3, 4, 5].to_vec();
-  averager::median(&mut numbers2);
-  let numbers3: Vec<usize> = [1, 22, 3, 4, 5].to_vec();
-  averager::mode(numbers3);
-  pig_latin::pig_latin("esse-jay");
+    let c1 = C;
+    let _ = A::new(&c1);
+}
+
+impl<'a> A<'a> {
+    fn new(c: &'a C) -> A<'a> {
+        A { c, b: B { c } }
+    }
 }

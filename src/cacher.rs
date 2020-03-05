@@ -1,39 +1,39 @@
-use std::collections::HashMap;
 use std::{thread, time};
 
-pub struct Cacher<T, I, R>
+#[allow(dead_code)]
+struct Cacher<T>
 where
-    T: Fn(I) -> R,
+    T: Fn(u32) -> u32,
 {
     calculation: T,
-    arg_map: HashMap<I, R>,
+    value: Option<u32>,
 }
 
-impl<T, I, R> Cacher<T, I, R>
+#[allow(dead_code)]
+impl<T> Cacher<T>
 where
-    T: Fn(I) -> R,
+    T: Fn(u32) -> u32,
 {
-    pub fn new(calculation: T) -> Cacher<T, I, R> {
-        let hmap: HashMap<I, R> = HashMap::new();
+    fn new(calculation: T) -> Cacher<T> {
         Cacher {
             calculation,
-            arg_map: hmap,
+            value: None,
         }
     }
 
-    pub fn value(&mut self, arg: I) -> R {
-        match self.arg_map.get(&arg) {
-            Some(v) => *v,
+    fn value(&mut self, arg: u32) -> u32 {
+        match self.value {
+            Some(v) => v,
             None => {
                 let v = (self.calculation)(arg);
-                self.arg_map.insert(arg, v);
+                self.value = Some(v);
                 v
             }
         }
     }
 }
-
-fn main() {
+#[allow(dead_code)]
+fn example() {
     fn generate_workout(intensity: u32, random_number: u32) {
         let mut expensive_result = Cacher::new(|num| {
             println!("calculating slowly...");
@@ -63,14 +63,7 @@ fn main() {
 fn call_with_different_values() {
     let mut c = Cacher::new(|a| a);
 
-    let v1 = c.value(1);
     let v2 = c.value(2);
 
     assert_eq!(v2, 2);
-}
-
-// TODO: cacher needs to be able to take any types!
-#[test]
-fn check_generic_values() {
-    let mut c = Cacher::new(|a| a);
 }
